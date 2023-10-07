@@ -3,6 +3,33 @@ entries:
   agents:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-10-07T00:24:26.86440696Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.2
+    - condition: omnirpc.enabled
+      name: omnirpc
+      repository: file://../omnirpc/
+      version: 0.2.9
+    - condition: scribe.enabled
+      name: scribe
+      repository: file://../scribe/
+      version: 0.2.14
+    - condition: jaeger.enabled
+      name: jaeger
+      repository: https://jaegertracing.github.io/helm-charts
+      version: 0.69.1
+    description: A Helm chart for Kubernetes
+    digest: dd5f2c486141e712edfd6420e0fe659cac6e7cb778af701d8a9b103f255d67b2
+    name: agents
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/agents-0.1.28/agents-0.1.28.tgz
+    version: 0.1.28
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-10-06T23:02:22.41007833Z"
     dependencies:
     - condition: mysql.enabled
@@ -631,6 +658,21 @@ entries:
   cctp:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-10-07T00:24:26.989065439Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.2
+    description: A cctp chart
+    digest: 9e91b5a4b391b1d58ab8e13b74f8bdde5723369505b723a7b7f3741f3c7f074f
+    name: cctp
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/cctp-0.2.2/cctp-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-10-06T23:02:22.641575931Z"
     dependencies:
     - condition: mysql.enabled
@@ -670,6 +712,25 @@ entries:
     - https://github.com/synapsecns/sanguine/releases/download/cctp-0.1.0/cctp-0.1.0.tgz
     version: 0.1.0
   explorer:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-10-07T00:24:27.111992917Z"
+    dependencies:
+    - condition: omnirpc.enabled
+      name: omnirpc
+      repository: file://../omnirpc/
+      version: 0.2.9
+    - condition: clickhouse.enabled
+      name: clickhouse
+      repository: https://sentry-kubernetes.github.io/charts
+      version: 3.1.3
+    description: A Helm chart for Kubernetes
+    digest: 8c915a24f815b8f850c682701dd28ee423502dd43419e8542654723a41403e94
+    name: explorer
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/explorer-0.2.14/explorer-0.2.14.tgz
+    version: 0.2.14
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-10-06T23:02:22.852502558Z"
@@ -901,6 +962,16 @@ entries:
   omnirpc:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-10-07T00:24:27.25942821Z"
+    description: A omnirpc chart
+    digest: 7ee45a04207a68884d3d6c1a09a1352b53f250c250e3a8b0e55f80b0595f7e32
+    name: omnirpc
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/omnirpc-0.2.9/omnirpc-0.2.9.tgz
+    version: 0.2.9
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-10-06T23:02:23.072373847Z"
     description: A omnirpc chart
     digest: 8a2838f846e6b45f1c46bd05d779aa76c359a39179bfad8a6e34610b9c863175
@@ -1021,6 +1092,25 @@ entries:
     - https://github.com/synapsecns/sanguine/releases/download/promexporter-0.1.0/promexporter-0.1.0.tgz
     version: 0.1.0
   scribe:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-10-07T00:24:27.38527069Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.2
+    - condition: omnirpc.enabled
+      name: omnirpc
+      repository: file://../omnirpc/
+      version: 0.2.9
+    description: A Helm chart for Kubernetes
+    digest: e132297875b080e704462ce8f2b10284c13a1fc3431eda48ed11752edf338f79
+    name: scribe
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/scribe-0.2.14/scribe-0.2.14.tgz
+    version: 0.2.14
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-10-06T23:02:23.310749973Z"
@@ -1361,4 +1451,4 @@ entries:
     urls:
     - https://github.com/synapsecns/sanguine/releases/download/scribe-0.1.0/scribe-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-06T23:02:23.311098779Z"
+generated: "2023-10-07T00:24:27.38577539Z"
