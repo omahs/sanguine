@@ -1,5 +1,6 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { BigNumber } from '@ethersproject/bignumber'
+import invariant from 'tiny-invariant'
 
 import {
   BridgeRoute,
@@ -13,7 +14,7 @@ import {
 import { ChainProvider } from '../router'
 import { FastBridge } from './fastBridge'
 import { Ticker, marshallTicker } from './ticker'
-import { BigintIsh } from '../constants'
+import { BigintIsh, MEDIAN_TIME_RFQ } from '../constants'
 
 export class FastBridgeSet extends SynapseModuleSet {
   public readonly bridgeModuleName = 'SynapseRFQ'
@@ -51,7 +52,9 @@ export class FastBridgeSet extends SynapseModuleSet {
    * @inheritdoc RouterSet.getOriginAmountOut
    */
   public getEstimatedTime(chainId: number): number {
-    // TODO: figure out estimated time for FastBridge
+    const medianTime = MEDIAN_TIME_RFQ[chainId as keyof typeof MEDIAN_TIME_RFQ]
+    invariant(medianTime, `No estimated time for chain ${chainId}`)
+    return medianTime
   }
 
   /**
