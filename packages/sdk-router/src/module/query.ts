@@ -101,3 +101,20 @@ export const hasComplexBridgeAction = (destQuery: Query): boolean => {
     destQuery.tokenOut !== ETH_NATIVE_TOKEN_ADDRESS
   )
 }
+
+/**
+ * Creates a Query object for a no-swap bridge action.
+ *
+ * @param token - The token to bridge.
+ * @param amount - The amount of token to bridge.
+ * @returns The Query object for a no-swap bridge action.
+ */
+export const createNoSwapQuery = (token: string, amount: BigNumber): Query => {
+  return {
+    routerAdapter: AddressZero,
+    tokenOut: token,
+    minAmountOut: amount,
+    deadline: BigNumber.from(0),
+    rawParams: '0x',
+  }
+}
