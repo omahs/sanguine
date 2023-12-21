@@ -14,7 +14,7 @@ import {
 import { ChainProvider } from '../router'
 import { FastBridge } from './fastBridge'
 import { Ticker, marshallTicker } from './ticker'
-import { BigintIsh, MEDIAN_TIME_RFQ } from '../constants'
+import { AddressMap, BigintIsh, MEDIAN_TIME_RFQ } from '../constants'
 
 export class FastBridgeSet extends SynapseModuleSet {
   public readonly bridgeModuleName = 'SynapseRFQ'
@@ -146,6 +146,7 @@ export class FastBridgeSet extends SynapseModuleSet {
     destChainId: number
   ): Promise<Ticker[]> {
     // TODO: hit Quoter API to get supported tickers, then unmarshall them
+    return []
   }
 
   /**
