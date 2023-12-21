@@ -2,13 +2,13 @@ import { Provider } from '@ethersproject/abstract-provider'
 import { BigNumber } from '@ethersproject/bignumber'
 
 import {
-  BridgeQuote,
   BridgeRoute,
   BridgeToken,
   SynapseModule,
   SynapseModuleSet,
   Query,
   createNoSwapQuery,
+  FeeConfig,
 } from '../module'
 import { ChainProvider } from '../router'
 import { FastBridge } from './fastBridge'
@@ -114,13 +114,21 @@ export class FastBridgeSet extends SynapseModuleSet {
   }
 
   /**
-   * @inheritdoc SynapseModuleSet.finalizeBridgeRoute
+   * @inheritdoc SynapseModuleSet.getFeeData
    */
-  public async finalizeBridgeRoute(
-    bridgeRoute: BridgeRoute,
-    deadline?: BigNumber
-  ): Promise<BridgeQuote> {
-    // TODO
+  async getFeeData(): Promise<{
+    feeAmount: BigNumber
+    feeConfig: FeeConfig
+  }> {
+    // TODO: figure out reported fee data for FastBridge
+    return {
+      feeAmount: BigNumber.from(0),
+      feeConfig: {
+        bridgeFee: 0,
+        minFee: BigNumber.from(0),
+        maxFee: BigNumber.from(0),
+      },
+    }
   }
 
   /**
