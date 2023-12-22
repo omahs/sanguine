@@ -15,6 +15,7 @@ import { ChainProvider } from '../router'
 import { FastBridge } from './fastBridge'
 import { Ticker, marshallTicker } from './ticker'
 import { AddressMap, BigintIsh, MEDIAN_TIME_RFQ } from '../constants'
+import { ONE_HOUR, TEN_MINUTES } from '../utils/deadlines'
 
 export class FastBridgeSet extends SynapseModuleSet {
   public readonly bridgeModuleName = 'SynapseRFQ'
@@ -131,6 +132,19 @@ export class FastBridgeSet extends SynapseModuleSet {
         minFee: BigNumber.from(0),
         maxFee: BigNumber.from(0),
       },
+    }
+  }
+
+  /**
+   * @inheritdoc SynapseModuleSet.getDefaultPeriods
+   */
+  getDefaultPeriods(): {
+    originPeriod: number
+    destPeriod: number
+  } {
+    return {
+      originPeriod: TEN_MINUTES,
+      destPeriod: ONE_HOUR,
     }
   }
 
