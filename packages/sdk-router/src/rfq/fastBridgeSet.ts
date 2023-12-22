@@ -164,6 +164,9 @@ export class FastBridgeSet extends SynapseModuleSet {
     destChainId: number
   ): Promise<Ticker[]> {
     // TODO: hit Quoter API to get supported tickers, then unmarshall them
+    if (originChainId === destChainId) {
+      throw new Error('Same chain swaps are not supported')
+    }
     return []
   }
 
@@ -179,6 +182,9 @@ export class FastBridgeSet extends SynapseModuleSet {
     amount: BigNumber
   ): Promise<BigNumber> {
     // TODO: hit Quoter API to get the quote for ticker.originToken -> ticker.destToken with the given amount
+    if (ticker.originToken.chainId === ticker.destToken.chainId) {
+      throw new Error('Same chain swaps are not supported')
+    }
     return amount
   }
 }
