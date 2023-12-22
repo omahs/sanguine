@@ -49,7 +49,8 @@ export async function bridge(
     this.synapseCCTPRouterSet.getModuleWithAddress(
       originChainId,
       originRouterAddress
-    )
+    ) ??
+    this.fastBridgeSet.getModuleWithAddress(originChainId, originRouterAddress)
   // Throw if Router is not found
   invariant(router, 'Invalid router address')
   // Ask the Router to populate the bridge transaction
@@ -70,6 +71,7 @@ export async function bridge(
  * @param amountIn - The amount of input token.
  * @param deadline - The transaction deadline, optional.
  * @param excludeCCTP - Flag to exclude CCTP quotes from the result, optional and defaults to False.
+ * @param excludeRFQ - Flag to exclude FastBridge (RFQ) quotes from the result, optional and defaults to False.
  *
  * @returns - A promise that resolves to the best bridge quote.
  *
@@ -83,7 +85,8 @@ export async function bridgeQuote(
   tokenOut: string,
   amountIn: BigintIsh,
   deadline?: BigNumber,
-  excludeCCTP: boolean = false
+  excludeCCTP: boolean = false,
+  excludeRFQ: boolean = false
 ): Promise<BridgeQuote> {
   invariant(
     originChainId !== destChainId,
@@ -95,6 +98,7 @@ export async function bridgeQuote(
   const allSets: { set: SynapseModuleSet; exclude: boolean }[] = [
     { set: this.synapseRouterSet, exclude: false },
     { set: this.synapseCCTPRouterSet, exclude: excludeCCTP },
+    { set: this.fastBridgeSet, exclude: excludeRFQ },
   ]
   // Fetch bridge routes from both types of routers
   const allRoutesPromises = allSets.map(({ set, exclude }) =>
@@ -178,6 +182,9 @@ export function getBridgeModuleName(
   if (this.synapseCCTPRouterSet.allEvents.includes(eventName)) {
     return this.synapseCCTPRouterSet.bridgeModuleName
   }
+  if (this.fastBridgeSet.allEvents.includes(eventName)) {
+    return this.fastBridgeSet.bridgeModuleName
+  }
   throw new Error('Unknown event')
 }
 
@@ -231,6 +238,9 @@ export function getModuleSet(
   }
   if (this.synapseCCTPRouterSet.bridgeModuleName === bridgeModuleName) {
     return this.synapseCCTPRouterSet
+  }
+  if (this.fastBridgeSet.bridgeModuleName === bridgeModuleName) {
+    return this.fastBridgeSet
   }
   throw new Error('Unknown bridge module')
 }
