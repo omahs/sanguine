@@ -14,7 +14,11 @@ import {
 import { ChainProvider } from '../router'
 import { FastBridge } from './fastBridge'
 import { Ticker, marshallTicker } from './ticker'
-import { AddressMap, BigintIsh, MEDIAN_TIME_RFQ } from '../constants'
+import {
+  BigintIsh,
+  MEDIAN_TIME_RFQ,
+  FAST_BRIDGE_ADDRESS_MAP,
+} from '../constants'
 import { ONE_HOUR, TEN_MINUTES } from '../utils/deadlines'
 
 export class FastBridgeSet extends SynapseModuleSet {
@@ -28,12 +32,12 @@ export class FastBridgeSet extends SynapseModuleSet {
     [chainId: number]: Provider
   }
 
-  constructor(chains: ChainProvider[], addressMap: AddressMap) {
+  constructor(chains: ChainProvider[]) {
     super()
     this.fastBridges = {}
     this.providers = {}
     chains.forEach(({ chainId, provider }) => {
-      const address = addressMap[chainId]
+      const address = FAST_BRIDGE_ADDRESS_MAP[chainId]
       // Skip chains without a FastBridge address
       if (address) {
         this.fastBridges[chainId] = new FastBridge(chainId, provider, address)
