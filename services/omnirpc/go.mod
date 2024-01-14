@@ -15,7 +15,7 @@ require (
 	github.com/brianvoe/gofakeit/v6 v6.20.1
 	github.com/buger/jsonparser v1.1.1
 	github.com/davecgh/go-spew v1.1.1
-	github.com/ethereum/go-ethereum v1.10.26
+	github.com/ethereum/go-ethereum v1.13.10
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-http-utils/headers v0.0.0-20181008091004-fed159eddc2a
 	github.com/go-resty/resty/v2 v2.10.0

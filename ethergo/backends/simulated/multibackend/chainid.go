@@ -7,6 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/eth/filters"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/ethereum/go-ethereum/trie"
 	util "github.com/synapsecns/sanguine/core"
 	"math/big"
 )
@@ -21,7 +22,6 @@ func NewConfigWithChainID(chainID *big.Int) *params.ChainConfig {
 		DAOForkBlock:                  util.CopyBigInt(params.AllEthashProtocolChanges.DAOForkBlock),
 		DAOForkSupport:                params.AllEthashProtocolChanges.DAOForkSupport,
 		EIP150Block:                   util.CopyBigInt(params.AllEthashProtocolChanges.EIP150Block),
-		EIP150Hash:                    params.AllEthashProtocolChanges.EIP150Hash,
 		EIP155Block:                   util.CopyBigInt(params.AllEthashProtocolChanges.EIP155Block),
 		EIP158Block:                   util.CopyBigInt(params.AllEthashProtocolChanges.EIP158Block),
 		ByzantiumBlock:                util.CopyBigInt(params.AllEthashProtocolChanges.ByzantiumBlock),
@@ -34,8 +34,10 @@ func NewConfigWithChainID(chainID *big.Int) *params.ChainConfig {
 		ArrowGlacierBlock:             util.CopyBigInt(params.AllEthashProtocolChanges.ArrowGlacierBlock),
 		GrayGlacierBlock:              util.CopyBigInt(params.AllEthashProtocolChanges.GrayGlacierBlock),
 		MergeNetsplitBlock:            util.CopyBigInt(params.AllEthashProtocolChanges.MergeNetsplitBlock),
-		ShanghaiBlock:                 util.CopyBigInt(params.AllEthashProtocolChanges.ShanghaiBlock),
-		CancunBlock:                   util.CopyBigInt(params.AllEthashProtocolChanges.CancunBlock),
+		ShanghaiTime:                  params.AllEthashProtocolChanges.ShanghaiTime,
+		CancunTime:                    params.AllEthashProtocolChanges.CancunTime,
+		PragueTime:                    params.AllEthashProtocolChanges.PragueTime,
+		VerkleTime:                    params.AllEthashProtocolChanges.VerkleTime,
 		TerminalTotalDifficulty:       params.AllEthashProtocolChanges.TerminalTotalDifficulty,
 		TerminalTotalDifficultyPassed: params.AllEthashProtocolChanges.TerminalTotalDifficultyPassed,
 		Ethash:                        params.AllEthashProtocolChanges.Ethash,
@@ -48,7 +50,7 @@ func NewSimulatedBackendWithConfig(alloc core.GenesisAlloc, gasLimit uint64, con
 	database := rawdb.NewMemoryDatabase()
 
 	genesis := core.Genesis{Config: config, GasLimit: gasLimit, Alloc: alloc}
-	genesis.MustCommit(database)
+	genesis.MustCommit(database, trie.NewDatabase(database, trie.HashDefaults))
 	blockchain, _ := core.NewBlockChain(database, nil, genesis.Config, ethash.NewFaker(), vm.Config{}, nil, nil)
 
 	backend := &SimulatedBackend{

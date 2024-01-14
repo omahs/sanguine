@@ -21,7 +21,7 @@ require (
 	github.com/Yamashou/gqlgenc v0.10.0
 	github.com/alecthomas/assert v0.0.0-20170929043011-405dbfeb8e38
 	github.com/brianvoe/gofakeit/v6 v6.20.1
-	github.com/ethereum/go-ethereum v1.10.26
+	github.com/ethereum/go-ethereum v1.13.10
 	github.com/friendsofgo/graphiql v0.2.2
 	github.com/gin-gonic/gin v1.9.1
 	github.com/integralist/go-findroot v0.0.0-20160518114804-ac90681525dc
