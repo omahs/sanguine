@@ -5919,10 +5919,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@rainbow-me/rainbowkit@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-1.3.3.tgz#3826f7a4e6827c35f876a4c3008da43a8cbfed28"
-  integrity sha512-IsUlBCy4SZfo6zFEZgPvGr1MLe/rK4sZzoBtYHRPjRqDHTXrYqDsp3ThTIZWh2HSIq0jU5gMA/94mFnT5kwMLA==
+"@rainbow-me/rainbowkit@^2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-2.0.0-beta.1.tgz#6d1125d7ec35dcfee451faa44856e2cbf8c3b25f"
+  integrity sha512-ahqf5wwHDWo0xBjZrH2uE1dLI4JsmPGTQW5yJvpMWaCGOR4MRZ8Uy7ytlKGhHva8FzlsBXhnNNwScLaiVss99Q==
   dependencies:
     "@vanilla-extract/css" "1.14.0"
     "@vanilla-extract/dynamic" "2.1.0"
@@ -8527,6 +8527,11 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.32.0.tgz#e0f4a830283612430450c13badd353766423f523"
   integrity sha512-ei4IYwL2kmlKSlCw9WgvV7PpXi0MiswVwfQRxawhJA690zWO3dU49igaQ/UMTl+Jy9jj9dK5IKAYvbX7kUvviQ==
 
+"@tanstack/query-core@5.17.15":
+  version "5.17.15"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.17.15.tgz#e73a3036e72398493ef9eee1678f89938111344c"
+  integrity sha512-QURxpu77/ICA4d61aPvV7EcJ2MwmksxUejKBaq/xLcO2TUJAlXf4PFKHC/WxnVFI/7F1jeLx85AO3Vpk0+uBXw==
+
 "@tanstack/query-persist-client-core@4.32.0":
   version "4.32.0"
   resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.32.0.tgz#8ab8670555b777fcc7cfde0581b42d28b6164933"
@@ -8555,6 +8560,13 @@
   dependencies:
     "@tanstack/query-core" "4.32.0"
     use-sync-external-store "^1.2.0"
+
+"@tanstack/react-query@^5.17.15":
+  version "5.17.15"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.17.15.tgz#2214491b97d77613155a3607a3af163ecde613b6"
+  integrity sha512-9qur91mOihaUN7pXm6ioDtS+4qgkBcCiIaZyvi3lZNcQZsrMGCYZ+eP3hiFrV4khoJyJrFUX1W0NcCVlgwNZxQ==
+  dependencies:
+    "@tanstack/query-core" "5.17.15"
 
 "@testing-library/cypress@^9.0.0":
   version "9.0.0"
@@ -10068,7 +10080,7 @@
     eventemitter3 "^4.0.7"
     zustand "^4.3.1"
 
-"@wagmi/core@2.2.1":
+"@wagmi/core@2.2.1", "@wagmi/core@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-2.2.1.tgz#e18d1ecaea5d5d4e78c3e0ef336f71506f4f5e8d"
   integrity sha512-eoTHG600lFpQyeofuo1nlAuTlI7rjduJK/yU4F8sLwjucROSE5RmD2OpQOkeEC3JGoXjrYxVPbY77PUD6ajzqw==

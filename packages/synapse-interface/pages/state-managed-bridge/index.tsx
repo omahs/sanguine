@@ -1,4 +1,4 @@
-import { useAccount } from 'wagmi'
+import { useAccount, useConfig } from 'wagmi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import toast from 'react-hot-toast'
@@ -78,6 +78,8 @@ const StateManagedBridge = () => {
   const quoteToastRef = useRef({ id: '' })
   const router = useRouter()
   const { query, pathname } = router
+
+  const config = useConfig()
 
   const {
     fromChainId,
@@ -388,7 +390,7 @@ const StateManagedBridge = () => {
             }
           : data
 
-      const tx = await sendTransaction(wagmiConfig, payload)
+      const tx = await sendTransaction(config, payload)
 
       const originChainName = CHAINS_BY_ID[fromChainId]?.name
       const destinationChainName = CHAINS_BY_ID[toChainId]?.name

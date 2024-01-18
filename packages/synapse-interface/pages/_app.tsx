@@ -5,6 +5,7 @@ import Head from 'next/head'
 import '@/patch'
 import { Analytics } from '@vercel/analytics/react'
 import { PersistGate } from 'redux-persist/integration/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import {
   boba,
@@ -30,7 +31,11 @@ import {
   optimism,
   polygon,
 } from 'wagmi/chains'
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
+import {
+  RainbowKitProvider,
+  darkTheme,
+  getDefaultConfig,
+} from '@rainbow-me/rainbowkit'
 import * as CHAINS from '@constants/chains/master'
 import { SynapseProvider } from '@/utils/providers/SynapseProvider'
 import CustomToaster from '@/components/toast'
@@ -85,6 +90,15 @@ for (const chain of rawChains) {
   })
 }
 
+/* New RainbowKit API */
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, optimism],
+})
+
+const queryClient = new QueryClient()
+
 function Updaters() {
   return (
     <>
@@ -100,22 +114,24 @@ function Updaters() {
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <WagmiProvider config={wagmiConfig}>
-      <RainbowKitProvider chains={chainsMatured} theme={darkTheme()}>
-        <SynapseProvider chains={chainsMatured}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <SegmentAnalyticsProvider>
-                <UserProvider>
-                  <Updaters />
-                  <Component {...pageProps} />
-                  <Analytics />
-                  <CustomToaster />
-                </UserProvider>
-              </SegmentAnalyticsProvider>
-            </PersistGate>
-          </Provider>
-        </SynapseProvider>
-      </RainbowKitProvider>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider theme={darkTheme()}>
+          <SynapseProvider chains={chainsMatured}>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <SegmentAnalyticsProvider>
+                  <UserProvider>
+                    <Updaters />
+                    <Component {...pageProps} />
+                    <Analytics />
+                    <CustomToaster />
+                  </UserProvider>
+                </SegmentAnalyticsProvider>
+              </PersistGate>
+            </Provider>
+          </SynapseProvider>
+        </RainbowKitProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   )
 }
