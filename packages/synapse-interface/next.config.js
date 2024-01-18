@@ -4,6 +4,7 @@ const path = require('path')
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: false,
+  transpilePackages: ['wagmi'],
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.nvmrc$/,

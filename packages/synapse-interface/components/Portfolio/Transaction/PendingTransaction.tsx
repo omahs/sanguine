@@ -1,6 +1,7 @@
 import { useMemo, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { waitForTransaction, Address } from '@wagmi/core'
+import { waitForTransactionReceipt } from '@wagmi/core'
+import { Address } from 'viem'
 import { useAppDispatch } from '@/store/hooks'
 import {
   removePendingBridgeTransaction,
@@ -26,6 +27,7 @@ import { DISCORD_URL } from '@/constants/urls'
 import { useApplicationState } from '@/slices/application/hooks'
 import { getEstimatedBridgeTime } from '@/utils/getEstimatedBridgeTime'
 import { useBridgeTxStatus } from '@/utils/hooks/useBridgeTxStatus'
+import { wagmiConfig } from '@/constants/wagmi'
 
 interface PendingTransactionProps extends TransactionProps {
   eventType?: number
@@ -195,9 +197,12 @@ export const PendingTransaction = ({
 
       const updateResolvedTransaction = async () => {
         try {
-          const resolvedTransaction = await waitForTransaction({
-            hash: transactionHash as Address,
-          })
+          const resolvedTransaction = await waitForTransactionReceipt(
+            wagmiConfig,
+            {
+              hash: transactionHash as Address,
+            }
+          )
 
           if (resolvedTransaction) {
             const currentTimestamp: number = getTimeMinutesFromNow(0)

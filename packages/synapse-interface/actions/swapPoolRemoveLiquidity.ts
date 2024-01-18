@@ -1,13 +1,14 @@
 import { ALL } from '@constants/withdrawTypes'
 import {
-  prepareWriteContract,
-  waitForTransaction,
+  simulateContract,
+  waitForTransactionReceipt,
   writeContract,
 } from '@wagmi/core'
 import { TransactionReceipt } from 'viem'
 
 import { getSwapDepositContractFields } from '@/utils/getSwapDepositContractFields'
 import { subtractSlippageBigInt } from '@/utils/slippage'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const swapPoolRemoveLiquidity = async ({
   chainId,
@@ -26,8 +27,8 @@ export const swapPoolRemoveLiquidity = async ({
 }) => {
   const { abi, poolAddress } = getSwapDepositContractFields(pool, chainId)
 
-  const { request } = await prepareWriteContract({
-    chainId,
+  const { request } = await simulateContract(wagmiConfig, {
+    chainId: chainId as any,
     address: poolAddress,
     abi,
     functionName: 'removeLiquidity',
@@ -44,8 +45,8 @@ export const swapPoolRemoveLiquidity = async ({
     ],
   })
 
-  const { hash } = await writeContract(request)
-  const txReceipt: TransactionReceipt = await waitForTransaction({ hash })
+  const hash = await writeContract(wagmiConfig, request)
+  const txReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
 
   return txReceipt
 }

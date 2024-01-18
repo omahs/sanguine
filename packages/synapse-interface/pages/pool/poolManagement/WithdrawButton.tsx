@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { TransactionButton } from '@/components/buttons/TransactionButton'
 import { RootState } from '@/store/store'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useSwitchChain } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { stringToBigInt } from '@/utils/bigint/format'
@@ -12,13 +12,12 @@ const WithdrawButton = ({ approveTxn, withdrawTxn, isApproved }) => {
   const [isConnected, setIsConnected] = useState(false) // Initialize to false
   const { openConnectModal } = useConnectModal()
 
-  const { chain } = useNetwork()
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { chains, switchChain } = useSwitchChain()
 
-  const { isConnected: isConnectedInit } = useAccount({
-    onDisconnect() {
-      setIsConnected(false)
-    },
+  const { isConnected: isConnectedInit, chain } = useAccount({
+    // onDisconnect() {
+    //   setIsConnected(false)
+    // },
   })
 
   useEffect(() => {
@@ -72,7 +71,7 @@ const WithdrawButton = ({ approveTxn, withdrawTxn, isApproved }) => {
   } else if (chain?.id !== pool.chainId) {
     buttonProperties = {
       label: `Switch to ${chains.find((c) => c.id === pool.chainId).name}`,
-      onClick: () => switchNetwork(pool.chainId),
+      onClick: () => switchChain({ chainId: pool.chainId as any }),
       pendingLabel: 'Switching chains',
     }
   } else if (!isApproved) {

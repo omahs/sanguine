@@ -1,9 +1,8 @@
-import { Chain } from 'wagmi'
+import { Chain } from 'viem/chains'
 
 export const klaytn = {
   id: 8217,
   name: 'Klaytn',
-  network: 'klaytn',
   nativeCurrency: {
     decimals: 18,
     name: 'Klaytn',
@@ -28,7 +27,6 @@ export const klaytn = {
 export const boba = {
   id: 288,
   name: 'Boba Network',
-  network: 'boba',
   nativeCurrency: {
     decimals: 18,
     name: 'Ether',
@@ -53,7 +51,6 @@ export const boba = {
 export const cronos = {
   id: 25,
   name: 'Cronos',
-  network: 'cronos',
   nativeCurrency: {
     decimals: 18,
     name: 'Cronos',
@@ -78,7 +75,6 @@ export const cronos = {
 export const dfk = {
   id: 53935,
   name: 'DFK Chain',
-  network: 'dfk',
   nativeCurrency: {
     decimals: 18,
     name: 'Jewel',
@@ -113,7 +109,6 @@ export const dfk = {
 export const dogechain = {
   id: 2000,
   name: 'Dogechain',
-  network: 'dogechain',
   nativeCurrency: {
     decimals: 18,
     name: 'Dogechain',
@@ -144,7 +139,6 @@ export const dogechain = {
 export const metis = {
   id: 1088,
   name: 'Metis',
-  network: 'andromeda',
   nativeCurrency: {
     decimals: 18,
     name: 'Metis',
@@ -175,7 +169,6 @@ export const metis = {
 export const canto = {
   id: 7700,
   name: 'Canto',
-  network: 'canto',
   nativeCurrency: {
     decimals: 18,
     name: 'Canto',
@@ -206,7 +199,6 @@ export const canto = {
 export const aurora = {
   id: 1313161554,
   name: 'Aurora',
-  network: 'aurora',
   nativeCurrency: {
     decimals: 18,
     name: 'Ether',
@@ -244,7 +236,6 @@ export const aurora = {
 export const base = {
   id: 8453,
   name: 'Base',
-  network: 'base',
   nativeCurrency: {
     decimals: 18,
     name: 'Ether',

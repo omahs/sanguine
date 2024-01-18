@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import { useEffect, useMemo, useState, memo } from 'react'
 import Link from 'next/link'
-import { Address, useAccount } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { LoaderIcon, toast } from 'react-hot-toast'
+import { Address } from 'viem'
 
 import { Token } from '@types'
 import { STAKE_PATH, getPoolUrl } from '@urls'

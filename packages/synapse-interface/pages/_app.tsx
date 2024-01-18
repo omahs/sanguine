@@ -17,7 +17,7 @@ import {
   canto,
   base,
 } from '@constants/extraWagmiChains'
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+
 import {
   arbitrum,
   avalanche,
@@ -30,16 +30,7 @@ import {
   optimism,
   polygon,
 } from 'wagmi/chains'
-import {
-  RainbowKitProvider,
-  darkTheme,
-  getDefaultWallets,
-  connectorsForWallets,
-} from '@rainbow-me/rainbowkit'
-import { rabbyWallet } from '@rainbow-me/rainbowkit/wallets'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
-import { publicProvider } from 'wagmi/providers/public'
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
 import * as CHAINS from '@constants/chains/master'
 import { SynapseProvider } from '@/utils/providers/SynapseProvider'
 import CustomToaster from '@/components/toast'
@@ -54,6 +45,8 @@ import BridgeUpdater from '@/slices/bridge/updater'
 import PortfolioUpdater from '@/slices/portfolio/updater'
 import TransactionsUpdater from '@/slices/transactions/updater'
 import _TransactionsUpdater from '@/slices/_transactions/updater'
+import { wagmiConfig } from '../constants/wagmi'
+import { WagmiProvider } from 'wagmi'
 
 const rawChains = [
   mainnet,
@@ -92,46 +85,6 @@ for (const chain of rawChains) {
   })
 }
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
-  chainsMatured,
-  [
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: chain['configRpc'],
-      }),
-    }),
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: chain['fallbackRpc'],
-      }),
-    }),
-    publicProvider(),
-  ]
-)
-
-const projectId = 'ab0a846bc693996606734d788cb6561d'
-
-const { wallets } = getDefaultWallets({
-  appName: 'Synapse',
-  projectId,
-  chains,
-})
-
-const connectors = connectorsForWallets([
-  ...wallets,
-  {
-    groupName: 'Other',
-    wallets: [rabbyWallet({ chains })],
-  },
-])
-
-export const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
-  webSocketPublicClient,
-})
-
 function Updaters() {
   return (
     <>
@@ -146,29 +99,24 @@ function Updaters() {
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
-      <Head>
-        <title>Synapse Protocol</title>
-      </Head>
-      <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains} theme={darkTheme()}>
-          <SynapseProvider chains={chains}>
-            <Provider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
-                <SegmentAnalyticsProvider>
-                  <UserProvider>
-                    <Updaters />
-                    <Component {...pageProps} />
-                    <Analytics />
-                    <CustomToaster />
-                  </UserProvider>
-                </SegmentAnalyticsProvider>
-              </PersistGate>
-            </Provider>
-          </SynapseProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </>
+    <WagmiProvider config={wagmiConfig}>
+      <RainbowKitProvider chains={chainsMatured} theme={darkTheme()}>
+        <SynapseProvider chains={chainsMatured}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <SegmentAnalyticsProvider>
+                <UserProvider>
+                  <Updaters />
+                  <Component {...pageProps} />
+                  <Analytics />
+                  <CustomToaster />
+                </UserProvider>
+              </SegmentAnalyticsProvider>
+            </PersistGate>
+          </Provider>
+        </SynapseProvider>
+      </RainbowKitProvider>
+    </WagmiProvider>
   )
 }
 

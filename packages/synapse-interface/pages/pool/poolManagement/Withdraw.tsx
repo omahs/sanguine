@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { useEffect, useMemo, useState } from 'react'
 import Slider from 'react-input-slider'
-import { Address } from '@wagmi/core'
+import { Address } from 'viem'
 import { useDispatch, useSelector } from 'react-redux'
 import { Token } from '@types'
 import { RootState } from '@/store/store'

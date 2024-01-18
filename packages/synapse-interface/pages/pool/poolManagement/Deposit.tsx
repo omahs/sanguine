@@ -14,7 +14,8 @@ import {
   emptyPoolDeposit,
 } from '@/utils/actions/approveAndDeposit'
 import LoadingTokenInput from '@components/loading/LoadingTokenInput'
-import { Address, fetchBalance } from '@wagmi/core'
+import { getBalance } from '@wagmi/core'
+import { Address } from 'viem'
 import { getSwapDepositContractFields } from '@/utils/getSwapDepositContractFields'
 import { calculatePriceImpact } from '@/utils/priceImpact'
 import { transformCalculateLiquidityInput } from '@/utils/transformCalculateLiquidityInput'
@@ -38,6 +39,7 @@ import { txErrorHandler } from '@/utils/txErrorHandler'
 import { fetchPoolUserData } from '@/slices/poolUserDataSlice'
 import { swapPoolCalculateAddLiquidity } from '@/actions/swapPoolCalculateAddLiquidity'
 import { zeroAddress } from 'viem'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const DEFAULT_DEPOSIT_QUOTE = {
   priceImpact: 0n,
@@ -305,9 +307,9 @@ const serializeToken = async (
   let fetchedBalance
 
   if (balanceToken.addresses[chainId] === zeroAddress) {
-    fetchedBalance = await fetchBalance({
+    fetchedBalance = await getBalance(wagmiConfig, {
       address: address as Address,
-      chainId,
+      chainId: chainId as any,
     })
 
     return {
@@ -320,9 +322,9 @@ const serializeToken = async (
       ),
     }
   } else if (balanceToken === WETHE) {
-    fetchedBalance = await fetchBalance({
+    fetchedBalance = await getBalance(wagmiConfig, {
       address: address as Address,
-      chainId,
+      chainId: chainId as any,
       token: balanceToken.addresses[chainId] as Address,
     })
 

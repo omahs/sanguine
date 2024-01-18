@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { TransactionButton } from '@/components/buttons/TransactionButton'
 import { EMPTY_BRIDGE_QUOTE, EMPTY_BRIDGE_QUOTE_ZERO } from '@/constants/bridge'
 import { RootState } from '@/store/store'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useSwitchChain } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { isAddress } from '@ethersproject/address'
 import {} from 'wagmi'
@@ -17,6 +17,7 @@ import { stringToBigInt } from '@/utils/bigint/format'
 import { useBridgeState } from '@/slices/bridge/hooks'
 import { usePortfolioBalances } from '@/slices/portfolio/hooks'
 import { PAUSED_FROM_CHAIN_IDS, PAUSED_TO_CHAIN_IDS } from '@/constants/chains'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const BridgeTransactionButton = ({
   approveTxn,
@@ -26,13 +27,16 @@ export const BridgeTransactionButton = ({
   const [isConnected, setIsConnected] = useState(false)
   const { openConnectModal } = useConnectModal()
 
-  const { chain } = useNetwork()
-  const { chains, error, pendingChainId, switchNetwork } = useSwitchNetwork()
+  const { chains, switchChain } = useSwitchChain()
 
-  const { address, isConnected: isConnectedInit } = useAccount({
-    onDisconnect() {
-      setIsConnected(false)
-    },
+  const {
+    address,
+    isConnected: isConnectedInit,
+    chain,
+  } = useAccount({
+    // onDisconnect() {
+    //   setIsConnected(false)
+    // },
   })
 
   useEffect(() => {
@@ -140,7 +144,7 @@ export const BridgeTransactionButton = ({
   } else if (chain?.id != fromChainId && fromValueBigInt > 0) {
     buttonProperties = {
       label: `Switch to ${chains.find((c) => c.id === fromChainId)?.name}`,
-      onClick: () => switchNetwork(fromChainId),
+      onClick: () => switchChain({ chainId: fromChainId as any }),
       pendingLabel: 'Switching chains',
     }
   } else if (!isApproved) {

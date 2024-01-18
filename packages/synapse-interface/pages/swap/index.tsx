@@ -1,4 +1,4 @@
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import toast from 'react-hot-toast'
@@ -43,10 +43,10 @@ import { DEFAULT_FROM_CHAIN, EMPTY_SWAP_QUOTE_ZERO } from '@/constants/swap'
 import { SwapToTokenListOverlay } from '@/components/StateManagedSwap/SwapToTokenListOverlay'
 import { LandingPageWrapper } from '@/components/layouts/LandingPageWrapper'
 import useSyncQueryParamsWithSwapState from '@/utils/hooks/useSyncQueryParamsWithSwapState'
+import { wagmiConfig } from '../../constants/wagmi'
 
 const StateManagedSwap = () => {
-  const { address } = useAccount()
-  const { chain } = useNetwork()
+  const { address, chain } = useAccount()
   const { synapseSDK } = useSynapseContext()
   const swapDisplayRef = useRef(null)
   const quoteToastRef = useRef({ id: '' })
@@ -259,8 +259,8 @@ const StateManagedSwap = () => {
       true
     )
     try {
-      const wallet = await getWalletClient({
-        chainId: swapChainId,
+      const wallet = await getWalletClient(wagmiConfig, {
+        chainId: swapChainId as any,
       })
 
       const data = await synapseSDK.swap(

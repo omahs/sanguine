@@ -1,4 +1,5 @@
-import { useBalance, useAccount, Address } from 'wagmi'
+import { useBalance, useAccount } from 'wagmi'
+import { Address } from 'viem'
 import { Token } from '../types'
 
 export const useTokenBalance = (token: Token, chainId: number) => {
@@ -9,8 +10,8 @@ export const useTokenBalance = (token: Token, chainId: number) => {
   const balance = useBalance({
     address,
     token: tokenAddress as Address,
-    chainId,
-    watch: true,
+    chainId: chainId as any,
+    // watch: true,
   })
 
   return balance

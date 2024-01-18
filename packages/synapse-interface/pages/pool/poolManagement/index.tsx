@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Address } from 'wagmi'
+import { Address } from 'viem'
 
 import { RootState } from '@/store/store'
 import LiquidityManagementTabs from '../components/LiquidityManagementTabs'

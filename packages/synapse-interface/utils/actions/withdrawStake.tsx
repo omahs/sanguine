@@ -1,4 +1,4 @@
-import { Address } from 'wagmi'
+import { Address } from 'viem'
 import toast from 'react-hot-toast'
 
 import ExplorerToastLink from '@/components/ExplorerToastLink'
@@ -37,7 +37,7 @@ export const withdrawStake = async (
     const toastContent = (
       <div>
         <div>Withdraw completed:</div>
-        <ExplorerToastLink {...tx} chainId={chainId} />
+        {/* <ExplorerToastLink {...tx} chainId={chainId} /> */}
       </div>
     )
 

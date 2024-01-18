@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { useEffect, useMemo, useState } from 'react'
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import {
   DISPLAY_POOLS_BY_CHAIN,
@@ -25,8 +25,7 @@ import {
 } from '@/constants/tokens/poolMaster'
 
 const PoolsPage = () => {
-  const { address: currentAddress } = useAccount()
-  const { chain } = useNetwork()
+  const { address: currentAddress, chain } = useAccount()
   const [connectedChainId, setConnectedChainId] = useState(0)
   const [address, setAddress] = useState(undefined)
 

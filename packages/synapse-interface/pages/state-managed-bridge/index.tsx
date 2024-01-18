@@ -1,4 +1,4 @@
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import toast from 'react-hot-toast'
@@ -30,7 +30,7 @@ import { formatBigIntToString } from '@/utils/bigint/format'
 import { calculateExchangeRate } from '@/utils/calculateExchangeRate'
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { Token } from '@/utils/types'
-import { getWalletClient } from '@wagmi/core'
+import { getWalletClient, sendTransaction } from '@wagmi/core'
 import { txErrorHandler } from '@/utils/txErrorHandler'
 import { AcceptedChainId, CHAINS_BY_ID } from '@/constants/chains'
 import { approveToken } from '@/utils/approveToken'
@@ -68,10 +68,10 @@ import { FromTokenListOverlay } from '@/components/StateManagedBridge/FromTokenL
 import { ToTokenListOverlay } from '@/components/StateManagedBridge/ToTokenListOverlay'
 
 import { waitForTransaction } from '@wagmi/core'
+import { wagmiConfig } from '../../constants/wagmi'
 
 const StateManagedBridge = () => {
   const { address } = useAccount()
-  const { chain } = useNetwork()
   const { synapseSDK } = useSynapseContext()
   const bridgeDisplayRef = useRef(null)
   const currentSDKRequestID = useRef(0)
@@ -354,9 +354,10 @@ const StateManagedBridge = () => {
       })
     )
     try {
-      const wallet = await getWalletClient({
-        chainId: fromChainId,
-      })
+      // getWalletCc
+      // const wallet = await getWalletClient({
+      //   // chainId: fromChainId,
+      // })
       const toAddress =
         destinationAddress && isAddress(destinationAddress)
           ? destinationAddress
@@ -387,7 +388,7 @@ const StateManagedBridge = () => {
             }
           : data
 
-      const tx = await wallet.sendTransaction(payload)
+      const tx = await sendTransaction(wagmiConfig, payload)
 
       const originChainName = CHAINS_BY_ID[fromChainId]?.name
       const destinationChainName = CHAINS_BY_ID[toChainId]?.name
@@ -436,11 +437,11 @@ const StateManagedBridge = () => {
 
       toast.dismiss(pendingPopup)
 
-      const transactionReceipt = await waitForTransaction({
-        hash: tx as Address,
-        timeout: 30_000,
-      })
-      console.log('Transaction Receipt: ', transactionReceipt)
+      // const transactionReceipt = await waitForTransaction({
+      //   hash: tx as Address,
+      //   timeout: 30_000,
+      // })
+      // console.log('Transaction Receipt: ', transactionReceipt)
 
       /** Update Origin Chain token balances after resolved tx or timeout reached */
       /** Assume tx has been actually resolved if above times out */

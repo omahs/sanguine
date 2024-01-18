@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAccount } from 'wagmi'
-import { Address } from '@wagmi/core'
+import { Address } from 'viem'
 import { useAppDispatch } from '@/store/hooks'
 import { useTransactionsState } from '../transactions/hooks'
 import { TransactionsState } from '../transactions/reducer'

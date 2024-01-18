@@ -1,11 +1,14 @@
-import { erc20ABI, multicall } from '@wagmi/core'
+import { multicall } from '@wagmi/core'
 import { Token, PoolData } from '@types'
 import { formatBigIntToString } from '@utils/bigint/format'
 import { getPoolTokenInfoArr, getTokenBalanceInfo } from '@utils/poolDataFuncs'
 import { getEthPrice, getAvaxPrice } from '@utils/actions/getPrices'
+import { erc20Abi } from 'viem'
 
 import lpTokenABI from '@/constants/abis/lpToken.json'
 import { SWAP_ABI } from '@/constants/abis/swap'
+import { wagmiConfig } from '@/constants/wagmi'
+import { AnyCnameRecord } from 'dns'
 
 export const getBalanceData = async ({
   pool,
@@ -49,7 +52,7 @@ export const getBalanceData = async ({
     } else {
       multicallInputs.push({
         address: token.addresses[chainId],
-        abi: erc20ABI,
+        abi: erc20Abi,
         functionName: 'balanceOf',
         chainId,
         args: [address],
@@ -73,13 +76,14 @@ export const getBalanceData = async ({
   multicallInputs.push(two)
   multicallInputs.push(three)
 
-  const multicallData: any[] = await multicall({
-    contracts: multicallInputs,
-    chainId,
-  }).catch((error) => {
-    console.error('Multicall failed:', error)
-    return []
-  })
+  // const multicallData: any[] = await multicall(wagmiConfig, {
+  //   // contracts: multicallInputs,
+  //   // chainId: chainId as any,
+  // }).catch((error) => {
+  //   console.error('Multicall failed:', error)
+  //   return []
+  // })
+  const multicallData = []
 
   const lpTotalSupply = multicallData[0].result ?? 0n
 

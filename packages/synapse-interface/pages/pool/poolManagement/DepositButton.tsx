@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useSwitchChain } from 'wagmi'
 import { useEffect, useMemo, useState } from 'react'
 import { RootState } from '@/store/store'
 
@@ -13,13 +13,12 @@ const DepositButton = ({ approveTxn, depositTxn }) => {
   const [isConnected, setIsConnected] = useState(false) // Initialize to false
   const { openConnectModal } = useConnectModal()
 
-  const { chain } = useNetwork()
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { chains, switchChain } = useSwitchChain()
 
-  const { isConnected: isConnectedInit } = useAccount({
-    onDisconnect() {
-      setIsConnected(false)
-    },
+  const { isConnected: isConnectedInit, chain } = useAccount({
+    // onDisconnect() {
+    //   setIsConnected(false)
+    // },
   })
 
   useEffect(() => {
@@ -94,7 +93,7 @@ const DepositButton = ({ approveTxn, depositTxn }) => {
   } else if (chain?.id !== pool.chainId) {
     buttonProperties = {
       label: `Switch to ${chains.find((c) => c.id === pool.chainId).name}`,
-      onClick: () => switchNetwork(pool.chainId),
+      onClick: () => switchChain({ chainId: pool.chainId as any }),
       pendingLabel: 'Switching chains',
     }
   } else if (isApprovalNeeded) {

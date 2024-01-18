@@ -1,12 +1,13 @@
-import { fetchBlockNumber } from '@wagmi/core'
+import { getBlockNumber } from '@wagmi/core'
 import { BRIDGABLE_TOKENS } from '@/constants/tokens'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const getCurrentBlockNumber = async (
   chainId: number
 ): Promise<bigint> => {
   try {
-    const blockNumber: bigint = await fetchBlockNumber({
-      chainId: chainId,
+    const blockNumber: bigint = await getBlockNumber(wagmiConfig, {
+      chainId: chainId as any,
     })
     return blockNumber
   } catch (error) {

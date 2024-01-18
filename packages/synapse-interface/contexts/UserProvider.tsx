@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { Chain } from 'viem'
 import { segmentAnalyticsEvent } from './SegmentAnalyticsProvider'
 import { useRouter } from 'next/router'
@@ -21,22 +21,21 @@ const WalletStatusContext = createContext(undefined)
 
 export const UserProvider = ({ children }) => {
   const dispatch = useAppDispatch()
-  const { chain } = useNetwork()
   const [isClient, setIsClient] = useState(false)
   const router = useRouter()
   const { query, pathname } = router
-  const { address, connector } = useAccount({
-    onConnect() {
-      segmentAnalyticsEvent(`[Wallet Analytics] connects`, {
-        walletId: connector?.id,
-        chainId: chain?.id,
-        query,
-        pathname,
-      })
-    },
-    onDisconnect() {
-      segmentAnalyticsEvent('[Wallet Analytics] disconnect', {})
-    },
+  const { address, connector, chain } = useAccount({
+    // onConnect() {
+    //   segmentAnalyticsEvent(`[Wallet Analytics] connects`, {
+    //     walletId: connector?.id,
+    //     chainId: chain?.id,
+    //     query,
+    //     pathname,
+    //   })
+    // },
+    // onDisconnect() {
+    //   segmentAnalyticsEvent('[Wallet Analytics] disconnect', {})
+    // },
   })
 
   const prevChainRef = useRef<Chain | null>(null)

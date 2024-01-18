@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import Fuse from 'fuse.js'
-import { useAccount, Address } from 'wagmi'
+import { useAccount } from 'wagmi'
+import { Address } from 'viem'
 import { useTransactionsState } from '@/slices/transactions/hooks'
 import { usePortfolioState } from '@/slices/portfolio/hooks'
 import { BridgeTransaction } from '@/slices/api/generated'

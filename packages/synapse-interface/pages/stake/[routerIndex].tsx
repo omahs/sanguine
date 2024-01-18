@@ -1,4 +1,4 @@
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { useRouter } from 'next/router'
 import StandardPageContainer from '@layouts/StandardPageContainer'
 import { LandingPageWrapper } from '@layouts/LandingPageWrapper'
@@ -23,8 +23,7 @@ export const getStaticProps = async (context) => {
 const SingleStakePage = () => {
   const router = useRouter()
   const { routerIndex } = router.query
-  const { address } = useAccount()
-  const { chain } = useNetwork()
+  const { address, chain } = useAccount()
 
   const pool = POOL_BY_ROUTER_INDEX[routerIndex as string]
 

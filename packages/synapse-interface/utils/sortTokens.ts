@@ -1,4 +1,5 @@
-import { multicall, Address } from '@wagmi/core'
+import { multicall } from '@wagmi/core'
+import { Address } from 'viem'
 import { zeroAddress } from 'viem'
 
 import multicallABI from '../constants/abis/multicall.json'
@@ -7,6 +8,7 @@ import { Token } from '@/utils/types'
 import { formatBigIntToString } from './bigint/format'
 import { TokenAndBalance } from './actions/fetchPortfolioBalances'
 import { CHAINS_BY_ID } from '@/constants/chains'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const sortByVisibilityRank = (tokens: Token[]) => {
   if (tokens === undefined) {
@@ -76,10 +78,11 @@ export const sortByTokenBalance = async (
 
   let multicallData: any[] | any
   if (multicallInputs.length > 0) {
-    multicallData = await multicall({
-      contracts: multicallInputs,
-      chainId,
-    })
+    // multicallData = await multicall(wagmiConfig, {
+    //   contracts: multicallInputs,
+    //   chainId,
+    // })
+    multicallData = []
     return sortArrayByBalance(
       sortByVisibilityRank(
         multicallData.map(

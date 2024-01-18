@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import MiniMaxButton from '../buttons/MiniMaxButton'
 import { formatBigIntToString, stringToBigInt } from '@/utils/bigint/format'
@@ -30,8 +30,7 @@ export const SwapInputContainer = () => {
     setHasMounted(true)
   }, [])
 
-  const { isConnected } = useAccount()
-  const { chain } = useNetwork()
+  const { isConnected, chain } = useAccount()
 
   const dispatch = useDispatch()
 

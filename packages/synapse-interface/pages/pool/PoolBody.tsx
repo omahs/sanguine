@@ -9,8 +9,8 @@ import PoolManagement from './poolManagement'
 import { zeroAddress } from 'viem'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-import { Address } from '@wagmi/core'
-import { useAccount, useSwitchNetwork } from 'wagmi'
+import { Address } from 'viem'
+import { useAccount, useSwitchChain } from 'wagmi'
 import { TransactionButton } from '@/components/buttons/TransactionButton'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { segmentAnalyticsEvent } from '@/contexts/SegmentAnalyticsProvider'
@@ -28,7 +28,7 @@ const PoolBody = ({
   connectedChainId?: number
 }) => {
   const [isClient, setIsClient] = useState(false)
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { chains, switchChain } = useSwitchChain()
   const { openConnectModal } = useConnectModal()
 
   const { isConnected } = useAccount()
@@ -156,7 +156,7 @@ const PoolBody = ({
                   onClick={() =>
                     new Promise((resolve, reject) => {
                       try {
-                        switchNetwork(pool.chainId)
+                        switchChain({ chainId: pool.chainId as any })
                         resolve(true)
                       } catch (e) {
                         reject(e)

@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useAppDispatch } from '@/store/hooks'
-import { useAccount, Address } from 'wagmi'
+import { useAccount } from 'wagmi'
+import { Address } from 'viem'
 import {
   useLazyGetUserHistoricalActivityQuery,
   useLazyGetUserPendingTransactionsQuery,
@@ -68,9 +69,9 @@ export default function Updater(): null {
     })
 
   const { address } = useAccount({
-    onDisconnect() {
-      dispatch(resetTransactionsState())
-    },
+    // onDisconnect() {
+    //   dispatch(resetTransactionsState())
+    // },
   })
 
   const masqueradeActive: boolean = useMemo(() => {

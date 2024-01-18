@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Address } from '@wagmi/core'
+import { Address } from 'viem'
 
 import { usePendingTxWrapper } from '@/utils/hooks/usePendingTxWrapper'
 import { getTokenAllowance } from '@/utils/actions/getTokenAllowance'

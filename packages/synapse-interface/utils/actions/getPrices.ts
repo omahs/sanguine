@@ -1,4 +1,5 @@
-import { readContract, fetchBalance, Address } from '@wagmi/core'
+import { readContract, getBalance } from '@wagmi/core'
+import { Address } from 'viem'
 import { SYN, WETH } from '@constants/tokens/bridgeable'
 import * as ALL_CHAINS from '@constants/chains/master'
 import {
@@ -8,10 +9,11 @@ import {
 } from '@constants/chainlink'
 import { SYN_ETH_SUSHI_TOKEN } from '@constants/tokens/sushiMaster'
 import CHAINLINK_AGGREGATOR_ABI from '@abis/chainlinkAggregator.json'
+import { wagmiConfig } from '@/constants/wagmi'
 
 export const getEthPrice = async (): Promise<number> => {
   // the price result returned by latestAnswer is 8 decimals
-  const ethPriceResult: bigint = (await readContract({
+  const ethPriceResult: bigint = (await readContract(wagmiConfig, {
     address: CHAINLINK_ETH_PRICE_ADDRESSES[ALL_CHAINS.ETH.id] as Address,
     abi: CHAINLINK_AGGREGATOR_ABI,
     functionName: 'latestAnswer',
@@ -29,7 +31,7 @@ export const getEthPrice = async (): Promise<number> => {
 
 export const getAvaxPrice = async (): Promise<number> => {
   // the price result returned by latestAnswer is 8 decimals
-  const avaxPriceResult: bigint = (await readContract({
+  const avaxPriceResult: bigint = (await readContract(wagmiConfig, {
     address: CHAINLINK_AVAX_PRICE_ADDRESSES[ALL_CHAINS.ETH.id] as Address,
     abi: CHAINLINK_AGGREGATOR_ABI,
     functionName: 'latestAnswer',
@@ -47,11 +49,11 @@ export const getAvaxPrice = async (): Promise<number> => {
 
 export const getMetisPrice = async (): Promise<number> => {
   // the price result returned by latestAnswer is 8 decimals
-  const metisPriceResult: bigint = (await readContract({
+  const metisPriceResult: bigint = (await readContract(wagmiConfig, {
     address: CHAINLINK_METIS_PRICE_ADDRESSES[ALL_CHAINS.METIS.id] as Address,
     abi: CHAINLINK_AGGREGATOR_ABI,
     functionName: 'latestAnswer',
-    chainId: ALL_CHAINS.METIS.id,
+    chainId: ALL_CHAINS.METIS.id as any,
   })) as bigint
 
   const metisPriceBigInt = metisPriceResult ?? 0n
@@ -67,18 +69,18 @@ export const getSynPrices = async () => {
   const ethPrice: number = await getEthPrice()
   const sushiSynBalance =
     (
-      await fetchBalance({
+      await getBalance(wagmiConfig, {
         token: SYN.addresses[ALL_CHAINS.ETH.id] as Address,
-        chainId: ALL_CHAINS.ETH.id,
+        chainId: ALL_CHAINS.ETH.id as any,
         address: SYN_ETH_SUSHI_TOKEN.addresses[ALL_CHAINS.ETH.id] as Address,
       })
     )?.value ?? 0n
 
   const sushiEthBalance =
     (
-      await fetchBalance({
+      await getBalance(wagmiConfig, {
         token: WETH.addresses[ALL_CHAINS.ETH.id] as Address,
-        chainId: ALL_CHAINS.ETH.id,
+        chainId: ALL_CHAINS.ETH.id as any,
         address: SYN_ETH_SUSHI_TOKEN.addresses[ALL_CHAINS.ETH.id] as Address,
       })
     )?.value ?? 0n

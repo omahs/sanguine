@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
-import { useAccount, Address } from 'wagmi'
+import { useAccount } from 'wagmi'
+import { Address } from 'viem'
 import { Chain, Token } from '@/utils/types'
 import { useTransactionsState } from '@/slices/transactions/hooks'
 import { usePortfolioState } from '@/slices/portfolio/hooks'
