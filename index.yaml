@@ -1206,6 +1206,21 @@ entries:
   screener:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-01-24T13:18:33.237615192Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.2
+    description: A screener chart
+    digest: 41ee1d2db705b54d517a4d9de49697ccfac9b6ba0fee1446b022d3d4e792d5cf
+    name: screener
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/screener-0.2.4/screener-0.2.4.tgz
+    version: 0.2.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-01-24T07:08:52.641499318Z"
     dependencies:
     - condition: mysql.enabled
@@ -1648,4 +1663,4 @@ entries:
     urls:
     - https://github.com/synapsecns/sanguine/releases/download/sinner-0.1.0/sinner-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-24T07:08:52.641811723Z"
+generated: "2024-01-24T13:18:33.237907548Z"
