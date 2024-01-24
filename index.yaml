@@ -1203,6 +1203,22 @@ entries:
     urls:
     - https://github.com/synapsecns/sanguine/releases/download/promexporter-0.1.0/promexporter-0.1.0.tgz
     version: 0.1.0
+  screener:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-01-24T03:29:48.086520729Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.2
+    description: A screener chart
+    digest: 567b48e162925ebee712a87a8e5f05ef9e4b6b4d1437ddcf0f641b16a3dc6ca1
+    name: screener
+    type: application
+    urls:
+    - https://github.com/synapsecns/sanguine/releases/download/screener-0.2.2/screener-0.2.2.tgz
+    version: 0.2.2
   scribe:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -1617,4 +1633,4 @@ entries:
     urls:
     - https://github.com/synapsecns/sanguine/releases/download/sinner-0.1.0/sinner-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-15T16:05:29.352592028Z"
+generated: "2024-01-24T03:29:48.086816659Z"
