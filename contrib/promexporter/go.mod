@@ -32,11 +32,19 @@ require (
 	github.com/synapsecns/sanguine/ethergo v0.1.0
 	github.com/synapsecns/sanguine/services/explorer v0.0.0-00010101000000-000000000000
 	github.com/synapsecns/sanguine/services/omnirpc v0.0.0-00010101000000-000000000000
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
 	go.opentelemetry.io/otel v1.22.0
 	go.opentelemetry.io/otel/metric v1.22.0
 	go.opentelemetry.io/otel/trace v1.22.0
 	golang.org/x/sync v0.6.0
+=======
+	github.com/urfave/cli/v2 v2.25.7
+	go.opentelemetry.io/otel v1.22.0
+	go.opentelemetry.io/otel/metric v1.22.0
+	go.opentelemetry.io/otel/trace v1.22.0
+	golang.org/x/sync v0.3.0
+>>>>>>> master
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -57,7 +65,10 @@ require (
 	github.com/aws/smithy-go v1.15.0 // indirect
 	github.com/benbjohnson/immutable v0.4.3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+<<<<<<< HEAD
 	github.com/bits-and-blooms/bitset v1.10.0 // indirect
+=======
+>>>>>>> master
 	github.com/brianvoe/gofakeit/v6 v6.27.0 // indirect
 	github.com/btcsuite/btcd v0.22.1 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.0 // indirect

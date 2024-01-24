@@ -21,7 +21,7 @@ require (
 	github.com/Yamashou/gqlgenc v0.10.0
 	github.com/alecthomas/assert v0.0.0-20170929043011-405dbfeb8e38
 	github.com/brianvoe/gofakeit/v6 v6.27.0
-	github.com/ethereum/go-ethereum v1.13.11
+github.com/ethereum/go-ethereum v1.11.6
 	github.com/friendsofgo/graphiql v0.2.2
 	github.com/gin-gonic/gin v1.9.1
 	github.com/integralist/go-findroot v0.0.0-20160518114804-ac90681525dc
@@ -38,11 +38,19 @@ require (
 	github.com/synapsecns/sanguine/ethergo v0.1.0
 	github.com/synapsecns/sanguine/services/explorer v0.0.180
 	github.com/synapsecns/sanguine/services/scribe v0.0.194
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
 	github.com/vektah/gqlparser/v2 v2.5.8
 	go.opentelemetry.io/otel v1.22.0
 	go.opentelemetry.io/otel/trace v1.22.0
 	golang.org/x/sync v0.6.0
+=======
+	github.com/urfave/cli/v2 v2.25.7
+	github.com/vektah/gqlparser/v2 v2.5.8
+	go.opentelemetry.io/otel v1.22.0
+	go.opentelemetry.io/otel/trace v1.22.0
+	golang.org/x/sync v0.3.0
+>>>>>>> master
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/driver/sqlite v1.5.4

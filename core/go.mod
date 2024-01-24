@@ -38,7 +38,11 @@ require (
 	github.com/stretchr/testify v1.8.4
 	github.com/temoto/robotstxt v1.1.2
 	github.com/uptrace/opentelemetry-go-extra/otelgorm v0.1.21
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
+=======
+	github.com/urfave/cli/v2 v2.25.7
+>>>>>>> master
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.42.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.42.0
 	go.opentelemetry.io/contrib/propagators/b3 v1.21.0
@@ -53,7 +57,11 @@ require (
 	go.opentelemetry.io/otel/sdk/metric v0.39.0
 	go.opentelemetry.io/otel/trace v1.22.0
 	go.uber.org/zap v1.25.0
+<<<<<<< HEAD
 	golang.org/x/sync v0.6.0
+=======
+	golang.org/x/sync v0.3.0
+>>>>>>> master
 	gorm.io/driver/sqlite v1.5.4
 	gorm.io/gorm v1.25.5
 	k8s.io/apimachinery v0.25.5

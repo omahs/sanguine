@@ -22,7 +22,7 @@ require (
 	github.com/Yamashou/gqlgenc v0.10.0
 	github.com/benbjohnson/immutable v0.4.3
 	github.com/brianvoe/gofakeit/v6 v6.27.0
-	github.com/ethereum/go-ethereum v1.13.11
+github.com/ethereum/go-ethereum v1.11.6
 	github.com/friendsofgo/graphiql v0.2.2
 	github.com/gin-gonic/gin v1.9.1
 	github.com/hashicorp/golang-lru/v2 v2.0.3
@@ -39,7 +39,11 @@ require (
 	github.com/synapsecns/sanguine/core v0.0.0-00010101000000-000000000000
 	github.com/synapsecns/sanguine/ethergo v0.1.0
 	github.com/synapsecns/sanguine/services/scribe v0.0.0-00010101000000-000000000000
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
+=======
+	github.com/urfave/cli/v2 v2.25.7
+>>>>>>> master
 	github.com/vektah/gqlparser/v2 v2.5.8
 	go.opentelemetry.io/otel v1.22.0
 	go.opentelemetry.io/otel/metric v1.22.0

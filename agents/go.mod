@@ -6,7 +6,11 @@ require (
 	github.com/BurntSushi/toml v1.3.2
 	github.com/Flaque/filet v0.0.0-20201012163910-45f684403088
 	github.com/MichaelMure/go-term-markdown v0.1.4
+<<<<<<< HEAD
 	github.com/aws/smithy-go v1.15.0
+=======
+	github.com/aws/smithy-go v1.13.5
+>>>>>>> master
 	github.com/brianvoe/gofakeit/v6 v6.27.0
 	github.com/coinbase/rosetta-sdk-go v0.8.1
 	github.com/davecgh/go-spew v1.1.1
@@ -27,13 +31,21 @@ require (
 	github.com/synapsecns/sanguine/services/scribe v0.0.194
 	github.com/synapsecns/sanguine/tools v0.0.0-00010101000000-000000000000
 	github.com/ugorji/go/codec v1.2.11
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
+=======
+	github.com/urfave/cli/v2 v2.25.7
+>>>>>>> master
 	github.com/vburenin/ifacemaker v1.2.0
 	github.com/vektra/mockery/v2 v2.14.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.42.0
 	go.opentelemetry.io/otel v1.22.0
 	go.opentelemetry.io/otel/trace v1.22.0
+<<<<<<< HEAD
 	golang.org/x/sync v0.6.0
+=======
+	golang.org/x/sync v0.3.0
+>>>>>>> master
 	google.golang.org/grpc v1.59.0
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.5.2

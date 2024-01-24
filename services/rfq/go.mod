@@ -9,6 +9,10 @@ require (
 	github.com/ethereum/go-ethereum v1.13.11
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-resty/resty/v2 v2.11.0
+<<<<<<< HEAD
+=======
+	github.com/google/uuid v1.5.0
+>>>>>>> master
 	github.com/ipfs/go-log v1.0.5
 	github.com/jellydator/ttlcache/v3 v3.1.1
 	github.com/jftuga/ellipsis v1.0.0
@@ -18,15 +22,25 @@ require (
 	github.com/puzpuzpuz/xsync/v2 v2.5.1
 	github.com/shopspring/decimal v1.3.1
 	github.com/stretchr/testify v1.8.4
+	github.com/synapsecns/sanguine/contrib/screener-api v0.0.0-00010101000000-000000000000
 	github.com/synapsecns/sanguine/core v0.0.0-00010101000000-000000000000
 	github.com/synapsecns/sanguine/ethergo v0.0.2
 	github.com/synapsecns/sanguine/services/omnirpc v0.0.0-00010101000000-000000000000
+<<<<<<< HEAD
 	github.com/urfave/cli/v2 v2.27.1
 	go.opentelemetry.io/otel v1.22.0
 	go.opentelemetry.io/otel/metric v1.22.0
 	go.opentelemetry.io/otel/trace v1.22.0
 	golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa
 	golang.org/x/sync v0.6.0
+=======
+	github.com/urfave/cli/v2 v2.25.7
+	go.opentelemetry.io/otel v1.22.0
+	go.opentelemetry.io/otel/metric v1.22.0
+	go.opentelemetry.io/otel/trace v1.22.0
+	golang.org/x/exp v0.0.0-20230206171751-46f607a40771
+	golang.org/x/sync v0.3.0
+>>>>>>> master
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/driver/sqlite v1.5.4
@@ -137,7 +151,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/s2a-go v0.1.4 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
-	github.com/google/uuid v1.5.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
 	github.com/googleapis/gax-go/v2 v2.11.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
@@ -288,6 +301,7 @@ replace (
 	// later versions give erros on uint64 being too high.
 	github.com/brianvoe/gofakeit/v6 => github.com/brianvoe/gofakeit/v6 v6.9.0
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+	github.com/synapsecns/sanguine/contrib/screener-api => ../../contrib/screener-api
 	github.com/synapsecns/sanguine/core => ../../core
 	github.com/synapsecns/sanguine/ethergo => ../../ethergo
 	github.com/synapsecns/sanguine/services/omnirpc => ../omnirpc
