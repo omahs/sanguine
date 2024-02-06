@@ -36,7 +36,7 @@ export const SynapseProvider = memo(
         const providerConfigs: FallbackProviderConfig[] = providerUrls.map(
           (url, index) => ({
             provider: new StaticJsonRpcProvider(url, chain.id),
-            priority: index,
+            priority: 1,
             stallTimeout: 750,
           })
         )
