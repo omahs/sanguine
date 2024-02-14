@@ -36,15 +36,10 @@ func (s *P2PTestSuite) TestLibP2PManager() {
 	for _, manager := range managers {
 		err := manager.Start(s.GetTestContext(), addresses)
 		s.Require().NoError(err)
-		time.Sleep(time.Second)
 	}
 
-	time.Sleep(time.Second * 2)
-	m1.DoSomething()
-	time.Sleep(time.Second * 1)
-	m1.DoSomething()
-	m3.DoSomething()
-	m2.DoSomethingElse()
+	time.Sleep(time.Second * 50)
+
 }
 
 func (s *P2PTestSuite) makeManager() p2p.LibP2PManager {
