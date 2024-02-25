@@ -36,13 +36,13 @@ func NewAnvilSuite(tb testing.TB) *AnvilSuite {
 func (a *AnvilSuite) SetupSuite() {
 	a.TestSuite.SetupSuite()
 
-	a.forkAddress = core.GetEnv("ETHEREUM_RPC_URI", "https://1rpc.io/eth")
+	a.forkAddress = core.GetEnv("ETHEREUM_RPC_URI", "https://rpc.ankr.com/eth")
 	options := anvil.NewAnvilOptionBuilder()
 	err := options.SetForkURL(a.forkAddress)
 	Nil(a.T(), err)
 
 	// enable otterscan
-	options.OtterscanEnabled(true)
+	options.OtterscanEnabled(false)
 
 	a.backend = anvil.NewAnvilBackend(a.GetSuiteContext(), a.T(), options)
 	a.options = options
