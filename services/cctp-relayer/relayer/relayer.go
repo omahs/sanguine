@@ -534,6 +534,7 @@ func (c *CCTPRelayer) fetchAndStoreCircleRequestSent(parentCtx context.Context, 
 	// - `circleRequestSentEvent` gives us auxiliary data for SynapseCCTP
 	var messageSentEvent *circlecctp.MessageTransmitterMessageSent
 	var circleRequestSentEvent *cctp.SynapseCCTPEventsCircleRequestSent
+	var requestID string
 
 	for _, log := range receipt.Logs {
 		// this should never happen
@@ -570,22 +571,30 @@ func (c *CCTPRelayer) fetchAndStoreCircleRequestSent(parentCtx context.Context, 
 		return nil, fmt.Errorf("no message sent event found")
 	}
 
-	if circleRequestSentEvent == nil {
+	if c.cctpType == relayTypes.SynapseMessageType && circleRequestSentEvent == nil {
 		return nil, fmt.Errorf("no circle request sent event found")
+	}
+
+	destChainID, err := parseDestChainID(messageSentEvent.Message)
+	if err != nil {
+		return nil, fmt.Errorf("could not get destination chain id: %w", err)
 	}
 
 	rawMsg := relayTypes.Message{
 		OriginTxHash:  txhash.String(),
 		OriginChainID: originChain,
-		DestChainID:   uint32(circleRequestSentEvent.ChainId.Int64()),
+		DestChainID:   destChainID,
 		Message:       messageSentEvent.Message,
 		MessageHash:   crypto.Keccak256Hash(messageSentEvent.Message).String(),
-		RequestID:     common.Bytes2Hex(circleRequestSentEvent.RequestID[:]),
+		RequestID:     requestID,
 
 		//Attestation: //comes from the api
-		RequestVersion:   circleRequestSentEvent.RequestVersion,
-		FormattedRequest: circleRequestSentEvent.FormattedRequest,
-		BlockNumber:      uint64(receipt.BlockNumber.Int64()),
+		BlockNumber: uint64(receipt.BlockNumber.Int64()),
+	}
+	if circleRequestSentEvent != nil {
+		rawMsg.RequestID = common.Bytes2Hex(circleRequestSentEvent.RequestID[:])
+		rawMsg.RequestVersion = circleRequestSentEvent.RequestVersion
+		rawMsg.FormattedRequest = circleRequestSentEvent.FormattedRequest
 	}
 
 	// Store the requested message.
