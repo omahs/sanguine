@@ -472,15 +472,26 @@ func (c *CCTPRelayer) handleLog(ctx context.Context, log *types.Log, chainID uin
 	switch log.Topics[0] {
 	// since this is the last stopic that comes out of the message, we use it to kick off the send loop
 	case cctp.CircleRequestSentTopic:
-		msg, err := c.fetchAndStoreCircleRequestSent(ctx, log.TxHash, chainID)
+		circleRequestSent, messageSent, err := c.parseCircleRequestSent(ctx, log.TxHash, chainID)
 		if err != nil {
-			return fmt.Errorf("could not fetch and store circle request sent: %w", err)
+			return fmt.Errorf("could not fetch circle request sent: %w", err)
+		}
+		msg, err := c.handleMessageSent(ctx, messageSent, circleRequestSent, chainID)
+		if err != nil {
+			return fmt.Errorf("could not handle message sent: %w", err)
 		}
 
 		if msg != nil {
 			c.triggerProcessQueue(ctx)
 		}
 
+		return nil
+	case circlecctp.MessageSentTopic:
+		messageSent, err := c.parseMessageSent(ctx, log.TxHash, chainID)
+		err = c.handleMessageSent(ctx, log, chainID)
+		if err != nil {
+			return fmt.Errorf("could not handle message sent: %w", err)
+		}
 		return nil
 	case cctp.CircleRequestFulfilledTopic:
 		err = c.handleCircleRequestFulfilled(ctx, log, chainID)
