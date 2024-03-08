@@ -21,7 +21,7 @@
 
 
 
-[Synapse](https://synapseprotocol.com/) is a interchain messaging protocol & bridge that allows for the creation of decentralized applications that can be deployed across multiple chains. This repo contains a variety of tools, interfaces and services that form the basis of, or are built on top of Synapse.
+[Synapse](https://synapseprotocol.com/) is an interchain messaging protocol & bridge that allows for the creation of decentralized applications that can be deployed across multiple chains. This repo contains a variety of tools, interfaces and services that form the basis of, or are built on top of Synapse.
 
 This repo serves as (or will serve) as the monrepo for all synapse code. Currently, only the [liquidity/bridge contracts](https://github.com/synapsecns/synapse-contracts) still need to be migrated.
 
@@ -140,7 +140,7 @@ We use a two-branch strategy for development:
 We use the following merge strategies:
 
 - **Squash merge**: All pull requests are squash merged into `master`. This keeps the commit history clean and makes it easier to revert changes if necessary.
-  > On a very few occasions, we may use a regular merge when `master` needs to be updated with a few commits from `fe-release`. In this case, we will use a regular merge so that there are no merge conflicts when later merging into `fe-release`.
+  > On very few occasions, we may use a regular merge when `master` needs to be updated with a few commits from `fe-release`. In this case, we will use a regular merge so that there are no merge conflicts when later merging into `fe-release`.
 - **Regular merge**: Latest changes from `master` are **regularly merged** into `fe-release`. This ensures that the production front-end always uses the latest changes from `master`, and prevents merge conflicts when merging into `fe-release`.
   > `master` branch should never be the **source branch** when merging into `fe-release`. This is because the source branch is always deleted after merging, and we don't want to delete `master`.
 
